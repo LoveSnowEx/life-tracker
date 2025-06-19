@@ -1,4 +1,5 @@
 import { useSignal } from "@preact/signals";
+import IconPlus from 'https://deno.land/x/tabler_icons_tsx@0.0.7/tsx/plus.tsx';
 import Counter from "../islands/Counter.tsx";
 
 export default function Home() {
@@ -95,6 +96,7 @@ export default function Home() {
           立即下單
         </button> */}
         <button className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+          <IconPlus color="white" size={32} />
           {/* <Plus className="w-6 h-6 text-white" /> */}
         </button>
       </div>
