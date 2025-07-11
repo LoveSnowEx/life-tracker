@@ -4,9 +4,14 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_joke from "./routes/api/joke.ts";
+import * as $api_oauth_callback from "./routes/api/oauth/callback.ts";
+import * as $api_oauth_login from "./routes/api/oauth/login.ts";
+import * as $api_oauth_logout from "./routes/api/oauth/logout.ts";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
+import * as $login_index from "./routes/login/index.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -14,9 +19,14 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/_middleware.ts": $_middleware,
     "./routes/api/joke.ts": $api_joke,
+    "./routes/api/oauth/callback.ts": $api_oauth_callback,
+    "./routes/api/oauth/login.ts": $api_oauth_login,
+    "./routes/api/oauth/logout.ts": $api_oauth_logout,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
+    "./routes/login/index.tsx": $login_index,
   },
   islands: {
     "./islands/Counter.tsx": $Counter,
