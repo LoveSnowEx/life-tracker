@@ -27,6 +27,7 @@
     "@olli/kvdex": "jsr:@olli/kvdex@^3.4.0",
     "@safe-env/safe-env": "jsr:@safe-env/safe-env@^0.1.7",
     "@std/path": "jsr:@std/path@^1.1.0",
+    "@std/ulid": "jsr:@std/ulid@^1.0.0",
     "preact": "https://esm.sh/preact@10.22.0",
     "preact/": "https://esm.sh/preact@10.22.0/",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",

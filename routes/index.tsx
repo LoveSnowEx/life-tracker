@@ -1,60 +1,16 @@
-import { useSignal } from "@preact/signals";
-import IconPlus from 'https://deno.land/x/tabler_icons_tsx@0.0.7/tsx/plus.tsx';
+/// <reference lib="deno.unstable" />
+import { signal } from "@preact/signals";
 import Counter from "../islands/Counter.tsx";
+import EventManager from "../islands/EventManager.tsx";
+import type { LifeEvent } from "../islands/EventManager.tsx";
+import { ulid } from "@std/ulid"
 
-export default function Home() {
-  const count = useSignal(3);
+export default async function Home() {
+  const kv = await Deno.openKv(":memory:");
+  const count = signal(0);
+  const events = signal<LifeEvent[]>([]);
   const title = "Life Tracker - 記錄生活中的大小事";
 
-  const stockData = [
-    { symbol: "永", name: "永豐NASDAQ", price: "$45" },
-    { symbol: "富", name: "富邦台灣", price: "$140" },
-    { symbol: "永", name: "永豐台灣", price: "$564" },
-    { symbol: "富", name: "富邦", price: "$29" },
-    { symbol: "永", name: "永豐台灣", price: "$278" },
-    { symbol: "永", name: "永豐台灣", price: "$589" },
-    { symbol: "永", name: "永豐NASDAQ", price: "$65" },
-    { symbol: "元", name: "元大台灣", price: "$503" },
-    { symbol: "國", name: "國泰台灣5G", price: "$190" },
-    { symbol: "永", name: "永豐台灣", price: "$140" },
-    { symbol: "中", name: "中信", price: "$249" },
-    { symbol: "國", name: "國泰台灣高股息低波動ETF投資信託基金", price: "$140" },
-    { symbol: "永", name: "永豐NASDAQ", price: "$65" },
-    { symbol: "富", name: "富邦台灣", price: "$140" },
-    { symbol: "國", name: "NVIDIA", price: "$149" },
-    { symbol: "永", name: "永豐台灣", price: "$1,564" },
-    { symbol: "永", name: "永豐台灣", price: "$207" },
-    { symbol: "富", name: "富邦台灣核心", price: "$280" },
-    { symbol: "P", name: "PChome 24h購物", price: "$3,950" },
-    { symbol: "永", name: "永豐台灣", price: "$173" },
-    { symbol: "永", name: "永豐台灣", price: "$168" },
-    { symbol: "永", name: "永豐台灣", price: "$90" },
-    { symbol: "國", name: "國泰台灣高股息低波動ETF", price: "$65" },
-    { symbol: "永", name: "永豐NASDAQ", price: "$0" },
-    { symbol: "富", name: "富邦台灣核心半導體科技基金", price: "$754" },
-    { symbol: "永", name: "永豐台灣", price: "$279" },
-    { symbol: "國", name: "NVIDIA", price: "$149" },
-    { symbol: "永", name: "永豐台灣", price: "$768" },
-    { symbol: "中", name: "中國電信股份有限公司H股證券投資信託基金", price: "$205" },
-    { symbol: "富", name: "富邦台灣", price: "$140" },
-    { symbol: "永", name: "永豐台灣", price: "$420" },
-    { symbol: "富", name: "富邦", price: "$65" },
-    { symbol: "永", name: "永豐台灣", price: "$458" },
-    { symbol: "永", name: "永豐台灣", price: "$742" },
-    { symbol: "永", name: "永豐台灣", price: "$450" },
-    { symbol: "永", name: "永豐台灣", price: "$461" },
-    { symbol: "永", name: "永豐台灣", price: "$2,014" },
-    { symbol: "富", name: "富邦台灣", price: "$140" },
-    { symbol: "國", name: "NVIDIA", price: "$149" },
-    { symbol: "永", name: "永豐台灣", price: "$26" },
-    { symbol: "永", name: "永豐台灣", price: "$299" },
-    { symbol: "永", name: "永豐台灣", price: "$912" },
-    { symbol: "永", name: "永豐台灣", price: "$472" },
-    { symbol: "永", name: "永豐台灣", price: "$62" },
-    { symbol: "中", name: "中華電信股份有限公司H股證券投資信託基金", price: "$902" },
-    { symbol: "永", name: "永豐台灣", price: "$660" },
-    { symbol: "富", name: "富邦台灣", price: "$209" }
-  ]
   return (
     <div className="bg-gray-50 max-w-screen-sm mx-auto min-h-screen flex flex-col">
       {/* Header */}
@@ -72,34 +28,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Event List */}
-      <div className="flex-1 overflow-y-auto pb-20">
-        {stockData.map((stock, index) => (
-          <div key={index} className="bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="w-8 h-8 bg-orange-400 rounded-full flex items-center justify-center mr-3">
-                <span className="text-white text-sm font-medium">{stock.symbol}</span>
-              </div>
-              <div>
-                <div className="text-gray-900 text-sm font-medium">{stock.name}</div>
-                <div className="text-gray-500 text-xs">股票代號</div>
-              </div>
-            </div>
-            <div className="text-gray-900 text-sm font-medium">{stock.price}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Floating Buttons */}
-      <div className="fixed bottom-20 right-4 flex flex-col gap-3">
-        {/* <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">
-          立即下單
-        </button> */}
-        <button className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-          <IconPlus color="white" size={32} />
-          {/* <Plus className="w-6 h-6 text-white" /> */}
-        </button>
-      </div>
+      {/* <Counter count={count} />
+      <EventManager kv={kv} events={events} /> */}
 
       {/* Bottom Navigation */}
       {/* <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
